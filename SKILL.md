@@ -1,5 +1,6 @@
 ---
 name: ontology-engineer
+version: 1.0.0
 description: >-
   Extract candidate ontology models from enterprise business systems AND build/maintain
   personal knowledge graphs from any file system. Use when: ontology extraction, 本体提取,
