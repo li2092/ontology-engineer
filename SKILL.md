@@ -1,6 +1,6 @@
 ---
 name: ontology-engineer
-version: 1.0.0
+version: 1.1.0
 description: >-
   Extract candidate ontology models from enterprise business systems AND build/maintain
   personal knowledge graphs from any file system. Use when: ontology extraction, 本体提取,
@@ -14,6 +14,27 @@ description: >-
   (C) External data scanning — same as B for others' data spaces (clients, partners).
   Handles .docx .doc .wps .pdf .xlsx .xls .et .pptx .ppt .dps .md .txt .sql .yaml .json .csv.
   Uses python-docx, PyMuPDF, openpyxl, python-pptx. Supports multimodal image analysis.
+  No external API keys or network access required — the LLM running this skill IS the
+  semantic analysis engine. All processing is local. File scanning is user-scoped via
+  mandatory Step 1.5 confirmation before any analysis begins.
+metadata.openclaw:
+  homepage: "https://github.com/li2092/ontology-engineer"
+  requires:
+    bins:
+      - python3
+    anyBins:
+      - libreoffice
+      - word
+  install:
+    - type: uv
+      packages:
+        - python-docx
+        - PyMuPDF
+        - openpyxl
+        - xlrd
+        - python-pptx
+        - Pillow
+        - pyyaml
 ---
 
 # Ontology Engineer
@@ -23,6 +44,12 @@ Extract candidate ontology models from existing data. Build and maintain persona
 **Core principle**: Make implicit business models in existing data explicit. Don't create from scratch.
 
 **Division of labor**: Scripts handle mechanical extraction (file scanning, format conversion, table parsing). LLM handles semantic judgment (entity identification, property selection, relationship discovery, naming, cross-source merging).
+
+**Security model**:
+- **No external API calls.** The LLM running this skill (Claude, OpenClaw, etc.) IS the semantic engine. No credentials, no network endpoints, no data exfiltration paths.
+- **User-scoped scanning.** Step 1.5 is a MANDATORY interactive checkpoint — the user reviews and approves every folder before any content is read. Nothing is analyzed without explicit confirmation.
+- **Local-only output.** All artifacts (graph.jsonl, schema.yaml, review.md) are written to a user-specified local directory. No data leaves the machine.
+- **Append-only writes.** Scripts only create/append files. No deletion, no modification of existing user files.
 
 ## When This Skill Adds Value (and When It Doesn't)
 
