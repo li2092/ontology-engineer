@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+experiments/
+*.jsonl
+*.skill
+.DS_Store
